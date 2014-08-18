@@ -1,0 +1,47 @@
+<h1>Tasks</h1>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <li><a href="/tasks/<%= task.id %>"><%= task.name %></a></li>
+  <% end %>
+</ul>
+
+<h2> New Task </h2>
+
+<% if @task.errors.any? %>
+  <h3>Please fix these errors:</h3>
+  <ul>
+    <% @task.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<form action="/tasks" method="post">
+  <label for="task_name">Name</label>
+  <input id="task_name" name="task[name]" type="text" value="<%= @task.name %>">
+  <label for="task_due_date">Due Date</label>
+  <input id="task_due_date" name="task[due_date]" type="text" value="<%= @task.due_date %>">
+  <button>Create Task</button>
+</form>
+
+
+<h2> Finished Tasks </h2>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <% if task.status == true %>
+      <li><a href="/tasks/<%= task.id %>"><%= task.name %></a></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h2> Not Finished Tasks </h2>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <% if task.status == false %>
+      <li><a href="/tasks/<%= task.id %>"><%= task.name %></a></li>
+    <% end %>
+  <% end %>
+</ul>

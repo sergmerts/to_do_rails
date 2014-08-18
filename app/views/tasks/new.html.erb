@@ -1,0 +1,18 @@
+<h1>New task</h1>
+
+<% if @task.errors.any? %>
+  <h3>Please fix these errors:</h3>
+  <ul>
+    <% @task.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<form action="/tasks" method="post">
+  <label for="task_name">Task name</label>
+  <input id="task_name" name="task[name]" type="text" value="<%= @task.name %>">
+  <label for="task_due_date">Due Date</label>
+  <input for="task_due_date" name="task[due_date]" type="text" value="<%= @task.due_date %>">
+  <button>Create Task</button>
+</form>
